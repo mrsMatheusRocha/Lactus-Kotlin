@@ -6,6 +6,8 @@ import androidx.navigation.compose.rememberNavController
 import mrsmatheusrocha.com.github.lactus_kotlin.navigation.Screen
 import mrsmatheusrocha.com.github.lactus_kotlin.ui.CadastroNutrizScreen
 import mrsmatheusrocha.com.github.lactus_kotlin.ui.LoginScreen
+import mrsmatheusrocha.com.github.lactus_kotlin.ui.ManagerScreen
+
 
 @Composable
 fun LactusApp() {
@@ -33,11 +35,11 @@ fun LactusApp() {
                 onBackClick = { navController.popBackStack() }
             )
         }
-//
-//        composable(route = Screen.Manager.route) {
-//            ManagerScreenMock(
-//                onBackClick = { navController.popBackStack() }
-//            )
-//        }
+
+        composable(route = Screen.Manager.route) {
+            ManagerScreen(
+                onBackClick = { navController.popBackStack() }
+            )
+        }
     }
 }

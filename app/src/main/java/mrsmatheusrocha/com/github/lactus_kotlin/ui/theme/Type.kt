@@ -9,11 +9,25 @@ import mrsmatheusrocha.com.github.lactus_kotlin.R.font;
 
 val PublicSans = FontFamily(
     Font(font.publicsans_regular, FontWeight.Normal),
-    Font(font.publicsans_bold, FontWeight.Bold)      // Para os destaques em negrito
+    Font(font.publicsans_bold, FontWeight.Bold)
 )
 
 val Typography = Typography(
 
+    bodySmall = TextStyle(
+        fontFamily = PublicSans,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.4.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = PublicSans,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.25.sp
+    ),
     bodyLarge = TextStyle(
         fontFamily = PublicSans,
         fontWeight = FontWeight.Normal,
@@ -22,6 +36,13 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     ),
 
+    headlineSmall = TextStyle(
+        fontFamily = PublicSans,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 32.sp,
+        letterSpacing = 0.sp
+    ),
     headlineLarge = TextStyle(
         fontFamily = PublicSans,
         fontWeight = FontWeight.Bold,
@@ -42,6 +63,14 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.15.sp
+    ),
+
+    labelSmall = TextStyle(
+        fontFamily = PublicSans,
+        fontWeight = FontWeight.Medium,
+        fontSize = 11.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp
     ),
 
     labelLarge = TextStyle(
