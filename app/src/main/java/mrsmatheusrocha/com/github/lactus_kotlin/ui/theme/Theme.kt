@@ -1,51 +1,45 @@
 package mrsmatheusrocha.com.github.lactus_kotlin.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = AmareloPrimary,
+    onPrimary = AzulEscuro,
+    secondary = AzulEscuro,
+    onSecondary = White,
+    tertiary = AzulClaro, // Equivalente ao --accent
+    background = BackgroundLight,
+    onBackground = ForegroundLight,
+    surface = CardLight,
+    onSurface = ForegroundLight,
+    surfaceVariant = MutedLight, // Equivalente ao --muted
+    error = Destructive
+)
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+private val DarkColorScheme = darkColorScheme(
+    primary = AmareloPrimary,
+    onPrimary = BackgroundDark, // Texto quase preto para contraste no escuro
+    secondary = AzulClaro, // O Azul Claro vira secundário no escuro, conforme seu CSS
+    onSecondary = White,
+    tertiary = AzulEscuro, // O Azul Escuro vira accent no escuro
+    background = BackgroundDark,
+    onBackground = ForegroundDark,
+    surface = CardDark,
+    onSurface = ForegroundDark,
+    surfaceVariant = MutedDark,
+    error = Destructive
 )
 
 @Composable
-fun LactusKotlinTheme(
+fun LactusTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
