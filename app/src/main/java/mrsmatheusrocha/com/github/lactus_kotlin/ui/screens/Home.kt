@@ -6,7 +6,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -14,6 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.animation.core.*
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.draw.alpha
+
 
 // 1. Dados Mockados (Exigência da Sprint 3 - Sem API real)
 data class HospitalMock(
@@ -43,6 +48,7 @@ fun HomeScreen(onHospitalClick: (Int) -> Unit = {}) {
         HeroSection()
         Spacer(modifier = Modifier.height(24.dp))
         ListaPostosSection(onHospitalClick)
+        MapboxPlaceholder()
         Spacer(modifier = Modifier.height(24.dp))
         GuiaIASection()
     }
@@ -130,7 +136,7 @@ fun ListaPostosSection(onHospitalClick: (Int) -> Unit) {
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
-            text = "Toque em um posto para ver detalhes ou agendar.",
+            text = "Toque em um posto para ver detalhes.",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
             modifier = Modifier.padding(bottom = 16.dp)
@@ -229,6 +235,60 @@ fun GuiaIASection() {
                         fontSize = 14.sp
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun MapboxPlaceholder() {
+    // 1. Criar a animação equivalente ao "animate-pulse" do Tailwind
+    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+    val alpha by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 0.4f, // Vai até 40% de opacidade e volta
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "pulse_alpha"
+    )
+
+    // 2. Container absoluto (bg-primary/5 flex items-center justify-center)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp) // Altura reservada para a visualização do mapa
+            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)),
+        contentAlignment = Alignment.Center
+    ) {
+        // 3. Card do centro com a animação de pulso (bg-background p-4 rounded-xl shadow-xl)
+        Surface(
+            modifier = Modifier.alpha(alpha), // Aplica a animação no card
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.background,
+            shadowElevation = 8.dp
+        ) {
+            Row(
+                modifier = Modifier.padding(16.dp), // p-4
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Ícone do MapPin
+                Icon(
+                    imageVector = Icons.Default.LocationOn,
+                    contentDescription = "Pin de Mapa",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(12.dp)) // gap-3
+
+                // Texto de carregamento
+                Text(
+                    text = "Carregando mapa interativo...",
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium, // font-medium
+                    color = MaterialTheme.colorScheme.onBackground
+                )
             }
         }
     }

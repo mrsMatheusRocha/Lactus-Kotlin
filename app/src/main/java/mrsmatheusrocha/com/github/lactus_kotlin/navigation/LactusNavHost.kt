@@ -4,6 +4,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mrsmatheusrocha.com.github.lactus_kotlin.navigation.Screen
+import mrsmatheusrocha.com.github.lactus_kotlin.ui.LoginScreen
 
 @Composable
 fun LactusApp() {
@@ -15,10 +16,10 @@ fun LactusApp() {
     ) {
 
         composable(route = Screen.Login.route) {
-//            LoginScreenMock(
-//                onLoginClick = { navController.navigate(Screen.Home.route) },
-//                onGestorClick = { navController.navigate(Screen.Manager.route) }
-//            )
+            LoginScreen(
+                onGestorClick = { navController.navigate(Screen.Manager.route) },
+                onCadastroClick = { navController.navigate(Screen.Cadastro.route) }
+            )
         }
 
         composable(route = Screen.Home.route) {
