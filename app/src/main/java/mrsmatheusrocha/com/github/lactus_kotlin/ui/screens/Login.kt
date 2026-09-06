@@ -40,7 +40,7 @@ fun LoginScreen(
         Text(
             text = "Lactus",
             style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary, // O Amarelo da Eurofarma
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold
         )
         Text(
@@ -50,7 +50,6 @@ fun LoginScreen(
             modifier = Modifier.padding(bottom = 48.dp, top = 8.dp)
         )
 
-        // Campo de E-mail
         OutlinedTextField(
             value = email,
             onValueChange = { viewModel.onEmailChange(it) },
@@ -63,7 +62,6 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Campo de Senha
         OutlinedTextField(
             value = password,
             onValueChange = { viewModel.onPasswordChange(it) },
@@ -86,7 +84,6 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Botão Principal (Amarelo Eurofarma com texto Azul)
         Button(
             onClick = { viewModel.validarLogin( onGestorClick) },
             modifier = Modifier

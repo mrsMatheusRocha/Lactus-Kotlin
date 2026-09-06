@@ -18,12 +18,13 @@ fun LactusApp() {
         composable(route = Screen.Login.route) {
             LoginScreen(
                 onGestorClick = { navController.navigate(Screen.Manager.route) },
-                onCadastroClick = { navController.navigate(Screen.Cadastro.route) }
+                onCadastroClick = { navController.navigate(Screen.Cadastro.route) },
             )
         }
 
         composable(route = Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(
+                onLoginClick = {navController.navigate(Screen.Login.route)})
         }
 
 //        composable(route = Screen.Cadastro.route) {

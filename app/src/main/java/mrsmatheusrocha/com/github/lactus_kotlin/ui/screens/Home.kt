@@ -18,6 +18,8 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.draw.alpha
+import mrsmatheusrocha.com.github.lactus_kotlin.ui.components.LactusFooter
+import mrsmatheusrocha.com.github.lactus_kotlin.ui.components.LactusScaffold
 
 
 // 1. Dados Mockados (Exigência da Sprint 3 - Sem API real)
@@ -36,25 +38,33 @@ val hospitaisMock = listOf(
 
 // 2. Tela Principal (Home)
 @Composable
-fun HomeScreen(onHospitalClick: (Int) -> Unit = {}) {
+fun HomeScreen(onHospitalClick: (Int) -> Unit = {}, onLoginClick: () -> Unit = {}) {
     val scrollState = rememberScrollState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(scrollState)
-    ) {
-        HeroSection()
-        Spacer(modifier = Modifier.height(24.dp))
-        ListaPostosSection(onHospitalClick)
-        MapboxPlaceholder()
-        Spacer(modifier = Modifier.height(24.dp))
-        GuiaIASection()
+    LactusScaffold(
+        onNavigateHome = { },
+        onNavigateLogin = onLoginClick
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(paddingValues)
+                .verticalScroll(scrollState)
+        ) {
+            HeroSection()
+            Spacer(modifier = Modifier.height(24.dp))
+            ListaPostosSection(onHospitalClick)
+            Spacer(modifier = Modifier.height(24.dp))
+            MapboxPlaceholder()
+            Spacer(modifier = Modifier.height(24.dp))
+            GuiaIASection()
+            Spacer(modifier = Modifier.weight(1f))
+            LactusFooter()
+        }
     }
 }
 
-// 3. Seção 1: Boas-vindas (Hero)
 @Composable
 fun HeroSection() {
     Column(
