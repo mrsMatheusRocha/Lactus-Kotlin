@@ -79,14 +79,12 @@ fun CadastroNutrizScreen(
         ) {
             Text(
                 text = "Cadastro de Nutriz",
-                style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Junte-se à rede Lactus e ajude a salvar vidas com a sua doação.",
-                style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center
             )
@@ -102,12 +100,10 @@ fun CadastroNutrizScreen(
                     Column(modifier = Modifier.padding(24.dp)) {
                         Text(
                             text = "Seus Dados",
-                            style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             text = "Preencha os campos abaixo para que nossa inteligência artificial Lia possa iniciar seu acompanhamento via WhatsApp.",
-                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                             modifier = Modifier.padding(bottom = 20.dp, top = 4.dp)
                         )
@@ -155,7 +151,6 @@ fun CadastroNutrizScreen(
                             Text(
                                 text = emailError,
                                 color = MaterialTheme.colorScheme.error,
-                                style = MaterialTheme.typography.bodySmall,
                                 modifier = Modifier.padding(top = 4.dp)
                             )
                         }
@@ -220,7 +215,6 @@ fun CadastroNutrizScreen(
                         ) {
                             Text(
                                 text = "Concluir Cadastro",
-                                style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
@@ -255,7 +249,6 @@ fun CadastroNutrizScreen(
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Muito obrigada por se juntar a nós. A nossa assistente Lia já vai enviar um \"Oi\" no seu WhatsApp para vocês se conhecerem!",
-                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
                             textAlign = TextAlign.Center
                         )

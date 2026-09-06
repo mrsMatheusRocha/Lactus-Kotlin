@@ -77,7 +77,6 @@ fun LoginScreen(
             Text(
                 text = errorMessage!!,
                 color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
@@ -100,7 +99,6 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Botão Secundário para Cadastro
         TextButton(onClick = onCadastroClick) {
             Text(
                 text = "Não possui conta? Cadastre-se",
