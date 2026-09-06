@@ -14,15 +14,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.animation.core.*
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.LayoutDirection
 import mrsmatheusrocha.com.github.lactus_kotlin.ui.components.LactusFooter
 import mrsmatheusrocha.com.github.lactus_kotlin.ui.components.LactusScaffold
 
 
-// 1. Dados Mockados (Exigência da Sprint 3 - Sem API real)
 data class HospitalMock(
     val id: Int,
     val nome: String,
@@ -36,7 +40,6 @@ val hospitaisMock = listOf(
     HospitalMock(3, "Hospital Geral de Vila Nova Cachoeirinha", 7.5, "21:00")
 )
 
-// 2. Tela Principal (Home)
 @Composable
 fun HomeScreen(onHospitalClick: (Int) -> Unit = {}, onLoginClick: () -> Unit = {}) {
     val scrollState = rememberScrollState()
@@ -72,7 +75,6 @@ fun HeroSection() {
             .fillMaxWidth()
             .padding(24.dp)
     ) {
-        // Badge "Zero Atrito"
         Surface(
             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
             shape = RoundedCornerShape(16.dp),
@@ -117,10 +119,9 @@ fun HeroSection() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Botão WhatsApp
         Button(
-            onClick = { /* Ação Mockada */ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF15803D)), // Verde WhatsApp
+            onClick = {},
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF15803D)),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
@@ -132,7 +133,6 @@ fun HeroSection() {
     }
 }
 
-// 4. Seção 2: Lista de Postos de Coleta (Substitui o Mapbox na Sprint 3)
 @Composable
 fun ListaPostosSection(onHospitalClick: (Int) -> Unit) {
     Column(
@@ -142,7 +142,7 @@ fun ListaPostosSection(onHospitalClick: (Int) -> Unit) {
     ) {
         Text(
             text = "Bancos de Leite Próximos",
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
@@ -194,55 +194,134 @@ fun ListaPostosSection(onHospitalClick: (Int) -> Unit) {
     }
 }
 
-// 5. Seção 3: Guia IA (Lia)
 @Composable
-fun GuiaIASection() {
+fun GuiaIASection(
+    onCadastroClick: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f))
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
             .padding(24.dp)
     ) {
+        // Título Principal
         Text(
-            text = "Sua Assistente Pessoal",
-            style = MaterialTheme.typography.titleLarge
+            text = "Sua Assistente Pessoal 24h por dia",
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.onBackground
         )
-        Spacer(modifier = Modifier.height(16.dp))
 
-        // Simulação do Chat
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text(
+            text = "A Lia é nossa inteligência artificial treinada por especialistas em aleitamento. Ela está sempre pronta no WhatsApp para:",
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+            ItemBeneficioIA(
+                icon = Icons.Default.Info,
+                text = "Tirar dúvidas sobre ordenha, armazenamento e cuidados."
+            )
+            ItemBeneficioIA(
+                icon = Icons.Default.Favorite,
+                text = "Oferecer apoio emocional e dicas para a amamentação."
+            )
+            ItemBeneficioIA(
+                icon = Icons.AutoMirrored.Filled.ArrowForward,
+                text = "Agendar coletas em domicílio sem burocracia."
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = onCadastroClick,
+            shape = RoundedCornerShape(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            ),
+            modifier = Modifier.height(48.dp)
+        ) {
+            Text(text = "Conhecer a Lia", style = MaterialTheme.typography.labelLarge)
+            Spacer(modifier = Modifier.width(8.dp))
+            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
         Card(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            shape = RoundedCornerShape(20.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        Icons.Default.Face,
-                        contentDescription = "Lia",
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(32.dp)
-                    )
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.primary)
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Surface(
+                        shape = RoundedCornerShape(50),
+                        color = Color.White,
+                        modifier = Modifier.size(40.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Default.Face,
+                                contentDescription = "Lia",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column {
-                        Text("Lia - Guia Lactus", style = MaterialTheme.typography.titleMedium)
-                        Text("Online agora", color = Color(0xFF4ADE80), fontSize = 12.sp)
+                        Text(
+                            text = "Lia - Guia Lactus",
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .size(8.dp)
+                                    .background(Color(0xFF4ADE80), RoundedCornerShape(50))
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = "Online agora",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+                            )
+                        }
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                Box(
+
+                Column(
                     modifier = Modifier
-                        .background(
-                            MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                            RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp, bottomStart = 16.dp)
-                        )
-                        .padding(12.dp)
+                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.15f))
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Text(
-                        "Olá! O leite ordenhado pode ficar na geladeira por até 12 horas. Quer que eu agende uma coleta domiciliar?",
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontSize = 14.sp
+                    BalaoMensagem(
+                        texto = "Olá! Como posso ajudar na sua jornada de amamentação hoje? Você tem dúvidas sobre a ordenha?",
+                        isDeLia = true
+                    )
+                    BalaoMensagem(
+                        texto = "Sim, posso guardar o leite na geladeira antes de doar?",
+                        isDeLia = false
+                    )
+                    BalaoMensagem(
+                        texto = "Ótima pergunta! O leite ordenhado pode ficar na geladeira por até 12 horas. Se for congelar, pode ficar por até 15 dias. Quer que eu agende uma coleta para o que você já tem?",
+                        isDeLia = true
                     )
                 }
             }
@@ -251,12 +330,70 @@ fun GuiaIASection() {
 }
 
 @Composable
+fun ItemBeneficioIA(icon: ImageVector, text: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Surface(
+            shape = RoundedCornerShape(50),
+            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+            modifier = Modifier.size(36.dp)
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        }
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+
+@Composable
+fun BalaoMensagem(texto: String, isDeLia: Boolean) {
+    val alignment = if (isDeLia) Alignment.CenterStart else Alignment.CenterEnd
+    val backgroundColor = if (isDeLia) {
+        MaterialTheme.colorScheme.surface
+    } else {
+        MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
+    }
+
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = alignment
+    ) {
+        Surface(
+            shape = RoundedCornerShape(
+                topStart = 16.dp,
+                topEnd = 16.dp,
+                bottomStart = if (isDeLia) 4.dp else 16.dp,
+                bottomEnd = if (isDeLia) 16.dp else 4.dp
+            ),
+            color = backgroundColor,
+            shadowElevation = 1.dp,
+            modifier = Modifier.fillMaxWidth(0.9f)
+        ) {
+            Text(
+                text = texto,
+                modifier = Modifier.padding(12.dp),
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = 13.sp
+            )
+        }
+    }
+}
+
+@Composable
 fun MapboxPlaceholder() {
-    // 1. Criar a animação equivalente ao "animate-pulse" do Tailwind
     val infiniteTransition = rememberInfiniteTransition(label = "pulse")
     val alpha by infiniteTransition.animateFloat(
         initialValue = 1f,
-        targetValue = 0.4f, // Vai até 40% de opacidade e volta
+        targetValue = 0.4f,
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 1000, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
@@ -264,39 +401,35 @@ fun MapboxPlaceholder() {
         label = "pulse_alpha"
     )
 
-    // 2. Container absoluto (bg-primary/5 flex items-center justify-center)
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp) // Altura reservada para a visualização do mapa
+            .height(300.dp)
             .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)),
         contentAlignment = Alignment.Center
     ) {
-        // 3. Card do centro com a animação de pulso (bg-background p-4 rounded-xl shadow-xl)
         Surface(
-            modifier = Modifier.alpha(alpha), // Aplica a animação no card
+            modifier = Modifier.alpha(alpha),
             shape = RoundedCornerShape(16.dp),
             color = MaterialTheme.colorScheme.background,
             shadowElevation = 8.dp
         ) {
             Row(
-                modifier = Modifier.padding(16.dp), // p-4
+                modifier = Modifier.padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Ícone do MapPin
                 Icon(
                     imageVector = Icons.Default.LocationOn,
                     contentDescription = "Pin de Mapa",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(24.dp)
                 )
-                Spacer(modifier = Modifier.width(12.dp)) // gap-3
+                Spacer(modifier = Modifier.width(12.dp))
 
-                // Texto de carregamento
                 Text(
                     text = "Carregando mapa interativo...",
                     style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Medium, // font-medium
+                    fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onBackground
                 )
             }

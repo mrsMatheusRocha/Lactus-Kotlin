@@ -161,7 +161,6 @@ fun CadastroNutrizScreen(
                         }
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // CEP
                         OutlinedTextField(
                             value = cep,
                             onValueChange = { cep = it },
@@ -206,7 +205,6 @@ fun CadastroNutrizScreen(
 
                         Spacer(modifier = Modifier.height(24.dp))
 
-                        // Botão de Submissão (Amarelo Eurofarma)
                         Button(
                             onClick = {
                                 if (email != confirmEmail) {

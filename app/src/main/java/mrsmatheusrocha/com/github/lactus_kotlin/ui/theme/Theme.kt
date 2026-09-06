@@ -11,21 +11,21 @@ private val LightColorScheme = lightColorScheme(
     onPrimary = AzulEscuro,
     secondary = AzulEscuro,
     onSecondary = White,
-    tertiary = AzulClaro, // Equivalente ao --accent
+    tertiary = AzulClaro,
     background = BackgroundLight,
     onBackground = ForegroundLight,
     surface = CardLight,
     onSurface = ForegroundLight,
-    surfaceVariant = MutedLight, // Equivalente ao --muted
+    surfaceVariant = MutedLight,
     error = Destructive
 )
 
 private val DarkColorScheme = darkColorScheme(
     primary = AmareloPrimary,
-    onPrimary = BackgroundDark, // Texto quase preto para contraste no escuro
-    secondary = AzulClaro, // O Azul Claro vira secundário no escuro, conforme seu CSS
+    onPrimary = BackgroundDark,
+    secondary = AzulClaro,
     onSecondary = White,
-    tertiary = AzulEscuro, // O Azul Escuro vira accent no escuro
+    tertiary = AzulEscuro,
     background = BackgroundDark,
     onBackground = ForegroundDark,
     surface = CardDark,

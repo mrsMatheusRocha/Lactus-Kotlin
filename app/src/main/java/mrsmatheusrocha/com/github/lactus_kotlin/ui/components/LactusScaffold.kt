@@ -58,7 +58,6 @@ fun LactusScaffold(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    // bg-background/95 backdrop-blur
                     containerColor = MaterialTheme.colorScheme.background.copy(alpha = 0.95f)
                 )
             )
@@ -89,8 +88,7 @@ fun LactusFooter() {
 
         Text(
             text = "Lactus © $anoAtual. Juntos pela vida. Um projeto inovador para doação de leite humano.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant, // text-muted-foreground
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(0.9f)
         )

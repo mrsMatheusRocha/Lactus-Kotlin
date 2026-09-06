@@ -28,7 +28,6 @@ class LoginViewModel : ViewModel() {
         _errorMessage.value = null
     }
 
-    // Validação mockada para separar a Nutriz do Gestor
     fun validarLogin( onGestorLogin: () -> Unit) {
         if (_email.value.lowercase().contains("gestor")) {
             onGestorLogin()
