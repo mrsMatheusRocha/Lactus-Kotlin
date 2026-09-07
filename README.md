@@ -29,6 +29,7 @@ O problema central não é a falta de vontade de doar, mas sim a comunicação e
 
 ### 1. Tela de Login
 <img width="300" alt="Tela Login" src="https://github.com/user-attachments/assets/60f78c78-2229-40ec-b558-6b3c20d488a0" />
+
 **Descrição:** Tela inicial do aplicativo onde o usuário insere seu e-mail e senha para acesso. Conta com validação visual de campos obrigatórios e tratamento de erros para credenciais incorretas
 
 ---
